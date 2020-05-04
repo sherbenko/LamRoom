@@ -2,13 +2,14 @@ package com.sherbenko.controller;
 
 import com.sherbenko.entity.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.validation.ConstraintViolationException;
 
-@RestController
+@Controller
 public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})

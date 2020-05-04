@@ -21,9 +21,10 @@ public class FindCountry {
         if (ip.equals(ipBel)) {
             return "Belarus";
         }
-        /*Path to GEO2 BD GeoLite2-Country.mmdb*/
 
-        String dbLocation = "../GeoLite2-Country.mmdb";
+        /*Path to GEO2 BD GeoLite2-Country.mmdb*/
+        String dbLocation = "C:/Users/ilyxa/Downloads/GeoLite2-Country_20200428/GeoLite2-Country.mmdb";
+
         File database = new File(dbLocation);
         DatabaseReader dbReader = new DatabaseReader.Builder(database).build();
 
