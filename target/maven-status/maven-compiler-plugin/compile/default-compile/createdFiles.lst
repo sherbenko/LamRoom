@@ -1,0 +1,6 @@
+com\sherbenko\controller\RoomController.class
+com\sherbenko\repository\RoomRepository.class
+com\sherbenko\App.class
+com\sherbenko\entity\Room.class
+com\sherbenko\service\Impl\RoomServiceImpl.class
+com\sherbenko\service\RoomService.class

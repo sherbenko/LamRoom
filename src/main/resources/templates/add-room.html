@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Lamp Rooms</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item "><a class="nav-link " th:href="@{/all-rooms}">List of Rooms</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h3> Create your Room</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/add}" th:object="${room}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="name" class="col-form-label">Name</label> <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name"/> <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+<!--                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>-->
+                        </div>
+
+                        <div class="form-group col-md-8">
+
+                        <select class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:field="*{country}">
+                            <option class="dropdown-item" th:value="Belarus" th:text="Belarus"></option>
+                            <option class="dropdown-item" th:value="Germany" th:text="Germany"></option>
+
+                        </select>
+                        </div>
+
+
+                        <div class="form-group col-md-8">
+                            <input type="radio"  name="dva" id="dva1" th:field="*{light}" th:value="1" onclick="connect()"/><label for="dva1">On</label> <input type="radio" name="dva" id="dva2" th:field="*{light}" th:value="0" onclick="connect()"/><label for="dva2">Off</label>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <input id="send" type="submit" class="btn btn-primary" value="Add Room"/>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
