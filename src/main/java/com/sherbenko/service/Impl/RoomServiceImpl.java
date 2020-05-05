@@ -6,7 +6,6 @@ import com.sherbenko.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -23,6 +22,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Room getRoomById(long id) {
+
         return roomRepository.findById(id);
     }
 

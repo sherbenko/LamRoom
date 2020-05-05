@@ -14,11 +14,13 @@ import java.net.InetAddress;
 import java.util.Optional;
 
 public class FindCountry {
+    private final static String IP_BEL = "127.0.0.1";
+
     public static String findCountryFromDb() throws IOException, GeoIp2Exception {
-        String ipBel = "127.0.0.1";
+
         String ip = fetchClientIpAddr();
 
-        if (ip.equals(ipBel)) {
+        if (ip.equals(IP_BEL)) {
             return "Belarus";
         }
 
