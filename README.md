@@ -1,5 +1,5 @@
 # LampRoom
-Roject_db.sql - dump of DB
+Project_db.sql - dump of DB
 
 
 --Spring Boot--
