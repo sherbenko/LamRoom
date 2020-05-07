@@ -4,10 +4,13 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.sherbenko.FindCountry;
 import com.sherbenko.entity.Room;
 
+import com.sherbenko.entity.ScoreCard;
 import com.sherbenko.exceptionHandlers.RoomNotFoundException;
 import com.sherbenko.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +25,7 @@ import java.sql.SQLException;
 public class RoomController {
     @Autowired
     private RoomService roomService;
-
+private long stId;
 
     @RequestMapping(value = {"/all-rooms","/"},method = RequestMethod.GET)
     public String getAllRooms(Model model){
@@ -37,7 +40,7 @@ public class RoomController {
 
     @RequestMapping(value = "edit/{id}",method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") long id, Model model) throws IOException, GeoIp2Exception, RoomNotFoundException, SQLException {
-
+        stId = id;
         String country = FindCountry.findCountryFromDb();
 
         Room room = roomService.getRoomById(id);
@@ -64,28 +67,26 @@ public class RoomController {
     }
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String updateRoom(@RequestParam(value = "id", required = false) Long id,@RequestParam(value = "light", required = false) boolean light,Model model){
-    Room room = roomService.getRoomById(id);
+
+        Room room = roomService.getRoomById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("all-rooms");
         room.setLight(light);
         roomService.saveRoom(room);
         return "redirect:/all-rooms";
     }
+    @MessageMapping("/scorecard")
+    @SendTo("/topic/livescore")
+    public ScoreCard getScoreCard(ScoreCard score) {
 
 
-//    @ExceptionHandler(SQLException.class)
-//    public String handleSQLException(HttpServletRequest request, Exception ex,Model model){
-////        logger.info("SQLException Occured:: URL="+request.getRequestURL());
-//        model.addAttribute("exception",ex);
-//        model.addAttribute("url",request.getRequestURL());
-//        return "database_error";
-//    }
-//    @ExceptionHandler(NullPointerException.class)
-//    public  String handleNull(HttpServletRequest request, Exception ex,Model model){
-//        model.addAttribute("exception",ex);
-//        model.addAttribute("url",request.getRequestURL());
-//        return "database_error";
-//    }
+        Room room = roomService.getRoomById(stId);
+        room.setLight(score.isVis());
+       roomService.saveRoom(room);
+        return score;
+    }
+
+
 
 
 }
