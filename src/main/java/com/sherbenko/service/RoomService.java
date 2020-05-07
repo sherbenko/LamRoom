@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface RoomService {
     Room saveRoom(Room room);
 
-   Room getRoomById(long id);
+    Room getRoomById(long id);
 
     Iterable<Room> getAllRooms();
 }

@@ -5,16 +5,16 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name ="room")
+@Table(name = "room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    private Long id;
     @NotNull
-    @Size(min=2, max=30)
-   private String name;
-   private String country;
-   private boolean light;
+    @Size(min = 2, max = 30)
+    private String name;
+    private String country;
+    private boolean light;
 
     public Room() {
     }

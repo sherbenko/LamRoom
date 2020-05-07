@@ -16,9 +16,7 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script>
         var stompClient = null;
-
         $(document).ready(function () {
-
             if (stompClient != null)
                 stompClient.disconnect();
 
@@ -30,21 +28,16 @@
                     var scoreJson = JSON.parse(scoredata.body);
 
                     if (scoreJson.vis) {
-                        // $("#tr").html(scoreJson.vis);
-                        $("#tr").attr("checked", true);
 
+                        $("#tr").prop("checked",true);
                     }
                     if (!scoreJson.vis) {
-                        // $("#fl").html(scoreJson.vis);
-                        $("#fl").attr("checked", true);
 
+                        $("#fl").prop("checked",true);
 
                     }
-
-
                 });
             });
-
             $("button").click(function () {
 
                 sendData2Socket();
@@ -53,17 +46,13 @@
 
         function sendData2Socket() {
 
-
             if ($("#tr").prop("checked")) {
                 stompClient.send("/app/scorecard", {}, JSON.stringify({'vis': true}));
             }
             if ($("#fl").prop("checked")) {
                 stompClient.send("/app/scorecard", {}, JSON.stringify({'vis': false}));
             }
-
-
         }
-
     </script>
 
 </head>
@@ -97,9 +86,9 @@
                             <div class="form-group" id="vis">
                                 <h4>Light: </h4><br></br>
                                 <input type="radio" id="tr" name="genderS" th:field="*{light}"
-                                       th:value="true">Male</input>
+                                       th:value="true">On       </input>
                                 <input type="radio" id="fl" name="genderS" th:field="*{light}"
-                                       th:value="false">Female</input>
+                                       th:value="false"> Off</input>
                             </div>
                         </div>
                         <div class="form-group col-md-8">

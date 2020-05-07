@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoomRepository extends CrudRepository<Room,Long> {
+public interface RoomRepository extends CrudRepository<Room, Long> {
     Room findById(long id);
 }
